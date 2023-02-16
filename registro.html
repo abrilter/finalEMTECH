@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasteles panquesos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <a href="index.html">
+                    <img src="images/logo.png" width="100px" height="100px"alt="Haz clic aquí para volver a la página de inicio">
+                </a>
+            </div>
+            <ul class="barra-nav" >
+                <li class="nav_item">
+                    <a href="./comprar.html">Comprar</a>
+                </li>
+                <li class="nav_item">
+                    <a href="./registro.html">Registro   </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+       <section>
+        <h1 class="tituloInicio">Pasteles "Panqueso"</h1>
+        <p style="text-align: center;">Crea tu usuario y contraseña</p>
+       </section>
+       <h2> Ingresar Datos </h2>
+       <form action ="indexC.php?opc=2" method = "POST" >
+        <label for="Usuario">Usuario</label>
+        <input type="text" name ="Usuario">
+        <label for="Contraseña">Constraseña</label>
+        <input type="password" name ="Contraseña">
+        <label for="Correo">Correo</label>
+        <input type="email" name ="Correo">
+        <label for="Nombre">Nombre</label>
+        <input type="text" name ="Nombre">
+        <label for="Apellido">Apellido</label>
+        <input type="text" name ="Apellido">
+
+        <input type= "submit" value="Insertar">
+    </form>

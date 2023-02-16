@@ -138,3 +138,38 @@ and(max-width:1000px){
   .footer-distributed .footer-left p.footer-links {
     line-height: 1.8;
   }
+}
+
+.pos {
+  flex: 0 0 33.33333%;
+  max-width: 33.33333%;
+}
+.objeto{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 8px;
+}
+.cobjeto {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+}
+.list-group {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-radius: 8px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 10px;
+  margin-left: 0px;
+}

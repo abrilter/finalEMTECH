@@ -5,7 +5,6 @@
     <title></title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -15,37 +14,37 @@
                     id: 1,
                     nombre: 'Pastel de Chocolate',
                     precio: 200,
-                    imagen: 'patata.jpg'
+                    imagen: './images/pastel1.jpg'
                 },
                 {
                     id: 2,
                     nombre: 'Pastel de Coco',
                     precio: 250,
-                    imagen: 'cebolla.jpg'
+                    imagen: './images/pastel1.jpg'
                 },
                 {
                     id: 3,
                     nombre: 'Pastel de Fresas de Zarzamora con Queso',
                     precio: 180,
-                    imagen: 'calabacin.jpg'
+                    imagen: './images/pastel1.jpg'
                 },
                 {
                     id: 4,
                     nombre: 'Pastel de Nuez',
                     precio: 300,
-                    imagen: 'fresas.jpg'
+                    imagen: './images/pastel1.jpg'
                 },
                 {
                     id: 5,
                     nombre: 'Pastel Mil Hojas',
                     precio: 250,
-                    imagen: 'fresas.jpg'
+                    imagen: './images/pastel1.jpg'
                 },
                 {
                     id: 6,
                     nombre: 'Pastel Tres Leches',
                     precio: 200,
-                    imagen: 'fresas.jpg'
+                    imagen: './images/pastel1.jpg'
                 }
 
             ];
@@ -67,28 +66,24 @@
                 baseDeDatos.forEach((info) => {
                     // Estructura
                     const miNodo = document.createElement('div');
-                    miNodo.classList.add('card', 'col-sm-4');
+                    miNodo.classList.add('objeto', 'pos');
                     // Body
                     const miNodoCardBody = document.createElement('div');
-                    miNodoCardBody.classList.add('card-body');
+                    miNodoCardBody.classList.add('cobjeto');
                     // Titulo
                     const miNodoTitle = document.createElement('h5');
-                    miNodoTitle.classList.add('card-title');
                     miNodoTitle.textContent = info.nombre;
                     // Imagen
                     const miNodoImagen = document.createElement('img');
-                    miNodoImagen.classList.add('img-fluid');
                     miNodoImagen.setAttribute('src', info.imagen);
                     // Precio
                     const miNodoPrecio = document.createElement('p');
-                    miNodoPrecio.classList.add('card-text');
-                    miNodoPrecio.textContent = `${info.precio}${divisa}`;
+                    miNodoPrecio.textContent = `${divisa}${info.precio}`;
                     // Boton 
                     const miNodoBoton = document.createElement('button');
-                    miNodoBoton.classList.add('btn', 'btn-primary');
                     miNodoBoton.textContent = '+';
                     miNodoBoton.setAttribute('marcador', info.id);
-                    miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+                    miNodoBoton.addEventListener('click', anadirAlCarrito);
                     // Insertamos
                     miNodoCardBody.appendChild(miNodoImagen);
                     miNodoCardBody.appendChild(miNodoTitle);
@@ -102,13 +97,13 @@
             /**
             * Evento para añadir un producto al carrito de la compra
             */
-            function anyadirProductoAlCarrito(evento) {
+            function anadirAlCarrito(evento) {
                 // Anyadimos el Nodo a nuestro carrito
                 carrito.push(evento.target.getAttribute('marcador'))
                 // Actualizamos el carrito 
                 renderizarCarrito();
                 // Actualizamos el LocalStorage
-                guardarCarritoEnLocalStorage();
+                guardarCarritoEnLocal();
             }
 
             /**
@@ -133,15 +128,14 @@
                     }, 0);
                     // Creamos el nodo del item del carrito
                     const miNodo = document.createElement('li');
-                    miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                    miNodo.classList.add();
                     miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
                     // Boton de borrar
-                    const miBoton = document.createElement('button');
-                    miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+                    const miBoton = document.createElement('button');                   
                     miBoton.textContent = 'X';
                     miBoton.style.marginLeft = '1rem';
                     miBoton.dataset.item = item;
-                    miBoton.addEventListener('click', borrarItemCarrito);
+                    miBoton.addEventListener('click', borrarDelCarrito);
                     // Mezclamos nodos
                     miNodo.appendChild(miBoton);
                     carritoDOM.appendChild(miNodo);
@@ -153,7 +147,7 @@
             /**
             * Evento para borrar un elemento del carrito
             */
-            function borrarItemCarrito(evento) {
+            function borrarDelCarrito(evento) {
                 // Obtenemos el producto ID que hay en el boton pulsado
                 const id = evento.target.dataset.item;
                 // Borramos todos los productos
@@ -163,7 +157,7 @@
                 // volvemos a renderizar
                 renderizarCarrito();
                 // Actualizamos el LocalStorage
-                guardarCarritoEnLocalStorage();
+                guardarCarritoEnLocal();
 
             }
 
@@ -195,11 +189,11 @@
 
             }
 
-            function guardarCarritoEnLocalStorage () {
+            function guardarCarritoEnLocal () {
                 miLocalStorage.setItem('carrito', JSON.stringify(carrito));
             }
 
-            function cargarCarritoDeLocalStorage () {
+            function cargarCarrito () {
                 // ¿Existe un carrito previo guardado en LocalStorage?
                 if (miLocalStorage.getItem('carrito') !== null) {
                     // Carga la información
@@ -211,7 +205,7 @@
             btnVaciarDOM.addEventListener('click', vaciarCarrito);
 
             // Inicio
-            cargarCarritoDeLocalStorage();
+            cargarCarrito();
             renderizarProductos();
             renderizarCarrito();
         });
@@ -235,21 +229,20 @@
             </ul>
         </nav>
     </header>
-    <div class="container">
         <div class="row">
             <!-- Elementos generados a partir del JSON -->
-            <main id="items" class="col-sm-8 row"></main>
+            <main id="items" class="row"></main>
             <!-- Carrito -->
-            <aside class="col-sm-4">
+            <aside class="pos">
                 <h2>Carrito</h2>
                 <!-- Elementos del carrito -->
                 <ul id="carrito" class="list-group"></ul>
                 <hr>
                 <!-- Precio total -->
-                <p class="text-right">Total: <span id="total"></span>&euro;</p>
-                <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+                <p>Total:&dollar; <span id="total"></span></p>
+                <br>
+                <button id="boton-vaciar">Vaciar</button>
             </aside>
         </div>
-    </div>
 </body>
 </html>
